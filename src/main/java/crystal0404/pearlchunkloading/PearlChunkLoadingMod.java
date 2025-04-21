@@ -11,10 +11,12 @@ public class PearlChunkLoadingMod implements ModInitializer {
 	public static final String MOD_NAME = "PearlChunkLoading";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
 	public static String version;
+	public static Boolean shouldKeepPearl;
 
 	@Override
 	public void onInitialize() {
 		version = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow().getMetadata().getVersion().getFriendlyString();
-		LOGGER.info("Hello Fabric world!");
+		shouldKeepPearl = Boolean.getBoolean("pearl.keep");
+		LOGGER.info("Pearl chunk loading!");
 	}
 }

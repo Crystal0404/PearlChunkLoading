@@ -3,7 +3,7 @@ plugins {
 	id 'maven-publish'
 }
 
-version = project.mod_version
+version = "v${project.mod_version}-mc${project.minecraft_version}"
 group = project.maven_group
 
 base {
@@ -11,11 +11,22 @@ base {
 }
 
 repositories {
-	// Add repositories to retrieve artifacts from in here.
-	// You should only use this when depending on other mods because
-	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
-	// for more information about repositories.
+	maven {
+		name = "Fabric"
+		url = "https://maven.fabricmc.net/"
+	}
+	maven {
+		name = "Fallen"
+		url = "https://maven.fallenbreath.me/releases"
+	}
+	maven {
+		name = "Modrinth"
+		url = "https://api.modrinth.com/maven"
+	}
+	maven {
+		name = "Masa"
+		url = "https://masa.dy.fi/maven"
+	}
 }
 
 dependencies {
@@ -23,19 +34,24 @@ dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+	modImplementation "carpettisaddition:carpet-tis-addition:${project.tis_carpet_version}"
+	modRuntimeOnly "maven.modrinth:lithium:${project.lithium_version}"
 }
 
 loom {
+	accessWidenerPath = file("src/main/resources/pearl.accesswidener")
 	runConfigs.configureEach {
 		vmArg("-Dmixin.debug.export=true")
+//		vmArg("-Dpearl.keep=true")
 	}
 }
 
 processResources {
-	inputs.property "version", project.version
+	inputs.property "version", project.mod_version
 
 	filesMatching("fabric.mod.json") {
-		expand "version": inputs.properties.version
+		expand "version": project.mod_version
 	}
 }
 
