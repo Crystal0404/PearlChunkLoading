@@ -8,8 +8,9 @@
 		"Crystal0404"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/Crystal0404",
+		"sources": "https://github.com/Crystal0404/PearlChunkLoading",
+		"issues": "https://github.com/Crystal0404/PearlChunkLoading/issues"
 	},
 	"license": "LGPL-3.0-only",
 	"icon": "assets/pearl/icon.png",
