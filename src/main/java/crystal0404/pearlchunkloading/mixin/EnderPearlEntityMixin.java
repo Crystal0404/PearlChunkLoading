@@ -29,6 +29,13 @@ public abstract class EnderPearlEntityMixin extends ThrownEntity {
     @Unique
     private long chunkTicketExpiryTicks = 0L;
 
+    // The default value is -1, which means that the pearl has not entered a high-speed motion state
+    // Otherwise, it represents the age when the pearl enters a state of high-speed motion
+    // If the pearl exits high-speed motion, this value is reset to -1
+    // If you enable "-Dpearl.keep=true", this value is always -1
+    @Unique
+    private int highSpeedAge = -1;
+
     @Inject(
             method = "tick",
             at = @At("HEAD")
@@ -48,10 +55,16 @@ public abstract class EnderPearlEntityMixin extends ThrownEntity {
             @Share("i") LocalIntRef i,
             @Share("j") LocalIntRef j
     ) {
+        boolean bl = this.isHighSpeed();
+        if (!PearlChunkLoadingMod.shouldKeepPearl && this.highSpeedAge == -1 && bl) {
+            this.highSpeedAge = this.age;
+        } else if (!PearlChunkLoadingMod.shouldKeepPearl && !bl) {
+            this.highSpeedAge = -1;
+        }
         if (
                 !PearlChunkLoadingMod.shouldKeepPearl
-                        && this.age > 100
-                        && (Math.abs(this.getVelocity().getX()) >= 20d || Math.abs(this.getVelocity().getZ()) >= 20d)
+                        && this.highSpeedAge != -1
+                        && this.age - this.highSpeedAge > 100
         ) {
             PearlChunkLoadingMod.LOGGER.warn(
                     "The pearl(own: {}) has been in high speed for a long time and has been removed",
@@ -76,6 +89,11 @@ public abstract class EnderPearlEntityMixin extends ThrownEntity {
                 }
             }
         }
+    }
+
+    @Unique
+    private boolean isHighSpeed() {
+        return Math.abs(this.getVelocity().getX()) >= 20d || Math.abs(this.getVelocity().getZ()) >= 20d;
     }
 
     @Unique
