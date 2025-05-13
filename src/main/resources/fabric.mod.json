@@ -1,0 +1,33 @@
+{
+	"schemaVersion": 1,
+	"id": "${id}",
+	"version": "${version}",
+	"name": "${name}",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Crystal0404"
+	],
+	"contact": {
+		"homepage": "https://github.com/Crystal0404",
+		"sources": "https://github.com/Crystal0404/fabric-example-mod-kt"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/template-mod/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.example.TemplateMod"
+		]
+	},
+	"mixins": [
+		"template-mod.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.14",
+		"minecraft": "~1.21.5",
+		"java": ">=21"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
