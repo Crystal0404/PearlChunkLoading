@@ -1,33 +1,33 @@
 {
 	"schemaVersion": 1,
-	"id": "${id}",
+	"id": "pearl",
 	"version": "${version}",
-	"name": "${name}",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "PearlChunkLoading",
+	"description": "Pearl chunk loading!",
 	"authors": [
 		"Crystal0404"
 	],
 	"contact": {
 		"homepage": "https://github.com/Crystal0404",
-		"sources": "https://github.com/Crystal0404/fabric-example-mod-kt"
+		"sources": "https://github.com/Crystal0404/PearlChunkLoading",
+		"issues": "https://github.com/Crystal0404/PearlChunkLoading/issues"
 	},
-	"license": "CC0-1.0",
-	"icon": "assets/template-mod/icon.png",
+	"license": "LGPL-3.0-only",
+	"icon": "assets/pearl/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.example.TemplateMod"
+			"crystal0404.pearlchunkloading.PearlChunkLoadingMod"
 		]
 	},
 	"mixins": [
-		"template-mod.mixins.json"
+		"pearl.mixins.json"
 	],
+	"accessWidener": "pearl.accesswidener",
 	"depends": {
-		"fabricloader": ">=0.16.14",
-		"minecraft": "~1.21.5",
+		"fabricloader": ">=0.16.0",
+		"mixinextras": ">=0.4.1",
+		"minecraft": ["1.21", "1.21.1"],
 		"java": ">=21"
-	},
-	"suggests": {
-		"another-mod": "*"
 	}
 }

@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"package": "crystal0404.pearlchunkloading.mixin",
+	"plugin": "crystal0404.pearlchunkloading.MixinPlugin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"EnderPearlEntityMixin",
+		"tis_carpet.TicketLoggerMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
