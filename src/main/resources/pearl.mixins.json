@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "com.github.crystal0404.mods.pearl.mixin",
+  "plugin": "com.github.crystal0404.mods.pearl.MixinPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "EnderPearlEntityMixin",
+    "EntityMixin",
+    "PlayerManagerMixin",
+    "ServerPlayerEntityMixin",
+    "impl.EnderPearlEntityMixin",
+    "impl.ServerPlayerEntityMixin",
+    "tis.TicketLoggerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+	}
+}

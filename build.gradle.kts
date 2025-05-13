@@ -21,14 +21,17 @@ group = "${project.property("maven_group")}"
 version = "v${this.getModVersion()}-mc${project.property("minecraft_version")}"
 
 repositories {
-    // Add repositories to retrieve artifacts from in here.
-    // You should only use this when depending on other mods because
-    // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-    // See https://docs.gradle.org/current/userguide/declaring_repositories.html
-    // for more information about repositories.
     maven {
         name = "Fabric"
         url = uri("https://maven.fabricmc.net/")
+    }
+    maven {
+        name = "Modrinth"
+        url = uri("https://api.modrinth.com/maven")
+    }
+    maven {
+        name = "Fallen"
+        url = uri("https://maven.fallenbreath.me/releases")
     }
 }
 
@@ -37,9 +40,22 @@ dependencies {
     minecraft("com.mojang:minecraft:${project.property("minecraft_version")}")
     mappings("net.fabricmc:yarn:${project.property("yarn_mappings")}:v2")
     modImplementation("net.fabricmc:fabric-loader:${project.property("loader_version")}")
+
+    setOf(
+        "fabric-api-base",
+        "fabric-command-api-v2",
+        "fabric-lifecycle-events-v1"
+    ).forEach {
+        modImplementation(fabricApi.module(it, "${project.property("fabric_version")}"))
+        include(fabricApi.module(it, "${project.property("fabric_version")}"))
+    }
+    modRuntimeOnly("maven.modrinth:carpet:${project.property("carpet_version")}")
+    modRuntimeOnly("me.fallenbreath:conditional-mixin-fabric:${project.property("conditional_mixin_version")}")
+    modImplementation("maven.modrinth:carpet-tis-addition:${project.property("tis_carpet_version")}")
 }
 
 loom {
+    accessWidenerPath.set(file("src/main/resources/pearl.accesswidener"))
     runConfigs.configureEach {
         vmArgs("-Dmixin.debug.export=true")
     }

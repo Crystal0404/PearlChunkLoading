@@ -20,4 +20,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "fabric-example-mod-kt"
+rootProject.name = "PearlChunkLoading"
