@@ -5,11 +5,19 @@ import net.minecraft.entity.projectile.thrown.EnderPearlEntity;
 import java.util.Set;
 
 public interface ServerPlayerEntityInterface {
-    long pearl$handleThrownEnderPearl(EnderPearlEntity enderPearl);
+    default long pearl$handleThrownEnderPearl(EnderPearlEntity enderPearl) {
+        throw new AssertionError();
+    }
 
-    void pearl$addEnderPearl(EnderPearlEntity enderPearl);
+    default void pearl$addEnderPearl(EnderPearlEntity enderPearl) {
+        throw new AssertionError();
+    }
 
-    void pearl$removeEnderPearl(EnderPearlEntity enderPearl);
+    default void pearl$removeEnderPearl(EnderPearlEntity enderPearl) {
+        throw new AssertionError();
+    }
 
-    Set<EnderPearlEntity> pearl$getEnderPearls();
+    default Set<EnderPearlEntity> pearl$getEnderPearls() {
+        throw new AssertionError();
+    }
 }

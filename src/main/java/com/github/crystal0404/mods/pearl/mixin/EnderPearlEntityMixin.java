@@ -3,7 +3,6 @@ package com.github.crystal0404.mods.pearl.mixin;
 import com.github.crystal0404.mods.pearl.ChunkUtils;
 import com.github.crystal0404.mods.pearl.PearlChunkLoadingMod;
 import com.github.crystal0404.mods.pearl.config.PearlSettings;
-import com.github.crystal0404.mods.pearl.interfaces.ServerPlayerEntityInterface;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
@@ -84,7 +83,7 @@ public abstract class EnderPearlEntityMixin extends ThrownItemEntity {
                     )
                             && entity instanceof ServerPlayerEntity serverPlayerEntity
             ) {
-                this.chunkTicketExpiryTicks = ((ServerPlayerEntityInterface) serverPlayerEntity).pearl$handleThrownEnderPearl(
+                this.chunkTicketExpiryTicks = serverPlayerEntity.pearl$handleThrownEnderPearl(
                         (EnderPearlEntity) ((Object) this)
                 );
                 if (!serverPlayerEntity.getServerWorld().entityList.has(this)) {

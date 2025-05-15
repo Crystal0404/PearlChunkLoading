@@ -1,7 +1,7 @@
 package com.github.crystal0404.mods.pearl.mixin;
 
 import com.github.crystal0404.mods.pearl.config.PearlSave;
-import com.github.crystal0404.mods.pearl.interfaces.ServerPlayerEntityInterface;
+import com.github.crystal0404.mods.pearl.config.PearlSettings;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,9 +18,11 @@ public abstract class ServerPlayerEntityMixin {
             at = @At("HEAD")
     )
     private void writeCustomDataToNbtMixin(NbtCompound nbt, CallbackInfo ci) {
+        if (!PearlSettings.isSave()) return;
+
         ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) ((Object) this);
         try {
-            PearlSave.save(serverPlayerEntity, (ServerPlayerEntityInterface) serverPlayerEntity);
+            PearlSave.save(serverPlayerEntity);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -31,9 +33,11 @@ public abstract class ServerPlayerEntityMixin {
             at = @At("TAIL")
     )
     private void readCustomDataFromNbtMixin(NbtCompound nbt, CallbackInfo ci) {
+        if (!PearlSettings.isSave()) return;
+
         ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) ((Object) this);
         try {
-            PearlSave.loadEnderPearls(serverPlayerEntity, (ServerPlayerEntityInterface) serverPlayerEntity);
+            PearlSave.loadEnderPearls(serverPlayerEntity);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

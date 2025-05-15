@@ -1,5 +1,7 @@
 package com.github.crystal0404.mods.pearl.interfaces;
 
 public interface EnderPearlEntityInterface {
-    void pearl$removeFromOwner();
+    default void pearl$removeFromOwner() {
+        throw new AssertionError();
+    }
 }

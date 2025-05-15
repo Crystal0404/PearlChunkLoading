@@ -1,7 +1,6 @@
 package com.github.crystal0404.mods.pearl.mixin.impl;
 
 import com.github.crystal0404.mods.pearl.interfaces.EnderPearlEntityInterface;
-import com.github.crystal0404.mods.pearl.interfaces.ServerPlayerEntityInterface;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.projectile.thrown.EnderPearlEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
@@ -18,7 +17,7 @@ public abstract class EnderPearlEntityMixin extends ThrownItemEntity implements 
     @Override
     public void pearl$removeFromOwner() {
         if (this.getOwner() instanceof ServerPlayerEntity serverPlayerEntity) {
-            ((ServerPlayerEntityInterface) serverPlayerEntity).pearl$removeEnderPearl(
+            serverPlayerEntity.pearl$removeEnderPearl(
                     (EnderPearlEntity) ((Object) this)
             );
         }

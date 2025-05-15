@@ -28,5 +28,15 @@
 		"fabricloader": ">=0.16.10",
 		"minecraft": ["1.21", "1.21.1"],
 		"java": ">=21"
+	},
+	"custom": {
+		"loom:injected_interfaces" : {
+			"net/minecraft/class_1684": [
+				"com/github/crystal0404/mods/pearl/interfaces/EnderPearlEntityInterface"
+			],
+			"net/minecraft/class_3222": [
+				"com/github/crystal0404/mods/pearl/interfaces/ServerPlayerEntityInterface"
+			]
+		}
 	}
 }

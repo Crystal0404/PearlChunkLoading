@@ -1,7 +1,6 @@
 package com.github.crystal0404.mods.pearl.mixin;
 
 import com.github.crystal0404.mods.pearl.config.PearlSettings;
-import com.github.crystal0404.mods.pearl.interfaces.ServerPlayerEntityInterface;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -23,7 +22,7 @@ public abstract class PlayerManagerMixin {
     )
     private void removeMixin(ServerPlayerEntity player, CallbackInfo ci) {
         if (PearlSettings.isSave()) {
-            ((ServerPlayerEntityInterface) player).pearl$getEnderPearls().forEach(
+            player.pearl$getEnderPearls().forEach(
                     enderPearlEntity -> enderPearlEntity.setRemoved(Entity.RemovalReason.UNLOADED_WITH_PLAYER)
             );
         }

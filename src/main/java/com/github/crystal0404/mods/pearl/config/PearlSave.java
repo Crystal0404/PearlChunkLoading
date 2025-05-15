@@ -2,7 +2,6 @@ package com.github.crystal0404.mods.pearl.config;
 
 import com.github.crystal0404.mods.pearl.ChunkUtils;
 import com.github.crystal0404.mods.pearl.PearlChunkLoadingMod;
-import com.github.crystal0404.mods.pearl.interfaces.ServerPlayerEntityInterface;
 import com.google.common.io.Files;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -50,16 +49,11 @@ public class PearlSave {
         );
     }
 
-    public static void save(
-            ServerPlayerEntity serverPlayerEntity,
-            ServerPlayerEntityInterface serverPlayerEntityInterface
-    ) throws IOException {
-        if (!PearlSettings.isSave()) return;
-
+    public static void save(ServerPlayerEntity serverPlayerEntity) throws IOException {
         NbtCompound nbt = getNbt();
         NbtList nbtList = new NbtList();
-        if (!serverPlayerEntityInterface.pearl$getEnderPearls().isEmpty()) {
-            for (EnderPearlEntity pearl : serverPlayerEntityInterface.pearl$getEnderPearls()) {
+        if (!serverPlayerEntity.pearl$getEnderPearls().isEmpty()) {
+            for (EnderPearlEntity pearl : serverPlayerEntity.pearl$getEnderPearls()) {
                 if (pearl.isRemoved()) {
                     PearlChunkLoadingMod.LOGGER.warn("Trying to save removed ender pearl, skipping");
                 } else {
@@ -79,18 +73,13 @@ public class PearlSave {
         Files.asCharSink(file, StandardCharsets.UTF_8).write(gson.toJson(json));
     }
 
-    public static void loadEnderPearls(
-            ServerPlayerEntity serverPlayerEntity,
-            ServerPlayerEntityInterface serverPlayerEntityInterface
-    ) throws IOException {
-        if (!PearlSettings.isSave()) return;
-
+    public static void loadEnderPearls(ServerPlayerEntity serverPlayerEntity) throws IOException {
         NbtCompound nbt = getNbt();
         NbtList nbtList = nbt.getList(serverPlayerEntity.getUuid().toString(), NbtElement.COMPOUND_TYPE);
         if (!nbtList.isEmpty()) {
             nbtList.forEach(nbtElement -> {
                 if (nbtElement instanceof NbtCompound nbtCompound) {
-                    loadEnderPearl(serverPlayerEntity, serverPlayerEntityInterface, nbtCompound);
+                    loadEnderPearl(serverPlayerEntity, nbtCompound);
                 }
             });
         }
@@ -98,7 +87,6 @@ public class PearlSave {
 
     private static void loadEnderPearl(
             ServerPlayerEntity serverPlayerEntity,
-            ServerPlayerEntityInterface serverPlayerEntityInterface,
             NbtCompound nbtCompound
     ) {
         RegistryKey<World> world = World.CODEC.parse(NbtOps.INSTANCE, nbtCompound.get("ender_pearl_dimension")).getOrThrow();
