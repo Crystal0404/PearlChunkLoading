@@ -1,5 +1,7 @@
 ## Pearl Chunk Loading
 
+中文 / [English](https://github.com/Crystal0404/PearlChunkLoading/blob/master/README_EN_US.md)
+
 **警告: 此模组处于ALPHA测试阶段, 可能出现无法预料的故障, 使用前备份你的世界**
 
 从`Minecraft1.21.2`移植的珍珠加载

@@ -1,5 +1,7 @@
 ## Pearl Chunk Loading
 
+[中文](https://github.com/Crystal0404/PearlChunkLoading) / English
+
 **Warning: This mod is in ALPHA testing phase. Unexpected issues may occur. Back up your world before use.**
 
 Port of pearl chunk loading from `Minecraft 1.21.2`.
