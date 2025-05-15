@@ -40,7 +40,6 @@ public abstract class EnderPearlEntityMixin extends ThrownItemEntity {
             at = @At("HEAD")
     )
     private void getVector(CallbackInfo ci, @Share("i") LocalIntRef i, @Share("j") LocalIntRef j) {
-        System.out.println("tick");
         i.set(ChunkUtils.getSectionCoordFloored(this.getPos().getX()));
         j.set(ChunkUtils.getSectionCoordFloored(this.getPos().getZ()));
     }
