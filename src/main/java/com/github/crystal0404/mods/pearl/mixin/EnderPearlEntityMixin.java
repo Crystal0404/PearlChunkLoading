@@ -64,7 +64,7 @@ public abstract class EnderPearlEntityMixin extends ThrownItemEntity {
         if (
                 this.shouldRemoveHighSpeedPearl()
                         && this.highSpeedAge != -1
-                        && this.age - this.highSpeedAge > 40
+                        && this.age - this.highSpeedAge > PearlSettings.getTime()
         ) {
             PearlChunkLoadingMod.LOGGER.warn(
                     "The pearl(own: {}) has been in high speed for a long time and has been removed",
