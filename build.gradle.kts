@@ -109,11 +109,6 @@ tasks.jar {
     }
 }
 
-// [FUNCTION]
-// see more advanced usages
-// https://modmuss50.github.io/mod-publish-plugin
-// modrinth pat
-// https://modrinth.com/settings/pats
 publishMods {
     val debug = providers.environmentVariable("BUILD_RELEASE").orNull == null
     dryRun = debug
@@ -127,14 +122,15 @@ publishMods {
         getModVersion().endsWith("beta") -> BETA
         else -> STABLE
     }
-//    modrinth {
-//        accessToken = providers.environmentVariable("MODRINTH_API_KEY")
-//        projectId = "123456"
-//        minecraftVersionRange {
-//            start = project.property("start").toString()
-//            end = project.property("end").toString()
-//        }
-//    }
+    modrinth {
+        accessToken = providers.environmentVariable("MODRINTH_API_KEY")
+        projectId = "Hu4rg8Ux"
+        minecraftVersionRange {
+            val range = project.property("minecraft_version_range").toString().split("-")
+            start = range.first()
+            end = range.last()
+        }
+    }
 }
 
 publishing {
